@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7C5CDB">
+<title>NOOK</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #29233d;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* PANTALLA DE INICIO */
+.inicio {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  background: linear-gradient(160deg, #ffffff, #f0ebff, #7656d9);
+}
+
+.logo {
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: #7656d9;
+}
+
+.corazon {
+  font-size: 32px;
+  color: #7656d9;
+  margin: 5px 0 15px;
+}
+
+.mensaje {
+  max-width: 350px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #6f687c;
+  margin-bottom: 35px;
+}
+
+.boton {
+  border: none;
+  background: #7656d9;
+  color: white;
+  padding: 16px 35px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(118,86,217,.25);
+}
+
+/* PRINCIPAL */
+.contenedor {
+  max-width: 650px;
+  margin: auto;
+  padding: 25px 18px;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mini-logo {
+  font-weight: 900;
+  letter-spacing: 5px;
+  color: #7656d9;
+}
+
+.admin {
+  border: none;
+  background: #f0ebff;
+  color: #7656d9;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-top: 35px;
+}
+
+.subtitulo {
+  text-align: center;
+  color: #777181;
+  line-height: 1.5;
+}
+
+.emociones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+  margin-top: 28px;
+}
+
+.emocion {
+  border: none;
+  background: white;
+  border-radius: 22px;
+  padding: 22px 10px;
+  min-height: 125px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #29233d;
+  box-shadow: 0 8px 25px rgba(50,35,80,.10);
+  cursor: pointer;
+}
+
+.emoji {
+  display: block;
+  font-size: 38px;
+  margin-bottom: 9px;
+}
+
+/* EMOCIÓN */
+.volver {
+  border: none;
+  background: #f0ebff;
+  color: #7656d9;
+  padding: 11px 15px;
+  border-radius: 13px;
+  font-weight: bold;
+}
+
+.emoji-grande {
+  text-align: center;
+  font-size: 65px;
+  margin-top: 30px;
+}
+
+.videos {
+  margin-top: 25px;
+  display: grid;
+  gap: 12px;
+}
+
+.video-boton {
+  border: none;
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  font-weight: bold;
+  box-shadow: 0 7px 22px rgba(50,35,80,.10);
+}
+
+.play {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #7656d9;
+  color: white;
+  display: grid;
+  place-items: center;
+}
+
+.aviso {
+  background: #faf9ff;
+  border-radius: 18px;
+  padding: 17px;
+  color: #777181;
+  margin-top: 18px;
+  line-height: 1.5;
+}
+
+/* ADMINISTRADOR */
+.admin-item {
+  background: white;
+  border-radius: 18px;
+  padding: 17px;
+  margin: 12px 0;
+  box-shadow: 0 7px 22px rgba(50,35,80,.10);
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(35,25,55,.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-contenido {
+  background: white;
+  padding: 25px;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.modal input {
+  width: 100%;
+  padding: 14px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.secundario {
+  width: 100%;
+  border: none;
+  background: #f0ebff;
+  color: #7656d9;
+  padding: 13px;
+  border-radius: 13px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- INICIO -->
+<section id="inicio" class="inicio">
+  <div class="logo">NOOK</div>
+  <div class="corazon">♥</div>
+
+  <div class="mensaje">
+    Tu pequeño rincón, hecho especialmente para ti.
+  </div>
+
+  <button class="boton" onclick="entrar()">
+    Entrar
+  </button>
+</section>
+
+
+<!-- PANTALLA PRINCIPAL -->
+<section id="principal" class="hidden">
+  <main class="contenedor">
+
+    <div class="encabezado">
+      <div class="mini-logo">NOOK</div>
+
+      <button class="admin" onclick="abrirAdmin()">
+        ⚙️
+      </button>
+    </div>
+
+    <h1>¿Cómo te sientes hoy?</h1>
+
+    <p class="subtitulo">
+      No importa cómo te sientas, aquí siempre habrá algo para ti. 💜
+    </p>
+
+    <div id="emociones" class="emociones"></div>
+
+  </main>
+</section>
+
+
+<!-- PANTALLA DE EMOCIÓN -->
+<section id="emocion" class="hidden">
+  <main class="contenedor">
+
+    <button class="volver" onclick="volverInicio()">
+      ← Volver
+    </button>
+
+    <div id="emojiGrande" class="emoji-grande"></div>
+
+    <h1 id="tituloEmocion"></h1>
+
+    <p id="descripcionEmocion" class="subtitulo"></p>
+
+    <div id="videos" class="videos"></div>
+
+    <div id="mensajeEmocion" class="aviso"></div>
+
+  </main>
+</section>
+
+
+<!-- MODAL ADMINISTRADOR -->
+<div id="modalAdmin" class="modal hidden">
+
+  <div class="modal-contenido">
+
+    <h2>Administrador 🔐</h2>
+
+    <p>
+      Introduce el código para administrar NOOK.
+    </p>
+
+    <input
+      id="codigo"
+      type="password"
+      inputmode="numeric"
+      maxlength="6"
+      placeholder="Código"
+    >
+
+    <button class="boton" onclick="comprobarCodigo()">
+      Entrar
+    </button>
+
+    <button class="secundario" onclick="cerrarAdmin()">
+      Cancelar
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- PANTALLA ADMIN -->
+<section id="administrador" class="hidden">
+
+  <main class="contenedor">
+
+    <button class="volver" onclick="volverPrincipal()">
+      ← Salir
+    </button>
+
+    <h1>Modo administrador 👑</h1>
+
+    <p class="subtitulo">
+      Desde aquí podrás administrar los videos de cada emoción.
+    </p>
+
+    <div id="listaAdmin"></div>
+
+  </main>
+
+</section>
+
+
+<script>
+
+const emociones = [
+
+  {
+    emoji: "😊",
+    nombre: "Feliz",
+    descripcion: "Me encanta saber que hoy estás feliz.",
+    mensaje: "Disfruta este momento bonito. 💜"
+  },
+
+  {
+    emoji: "😢",
+    nombre: "Triste",
+    descripcion: "Si estás pasando por un momento difícil, quiero acompañarte.",
+    mensaje: "Respira. No tienes que solucionar todo ahora. Estoy contigo."
+  },
+
+  {
+    emoji: "🤩",
+    nombre: "Emocionada",
+    descripcion: "¡Me encanta verte emocionada!",
+    mensaje: "Disfruta muchísimo este momento."
+  },
+
+  {
+    emoji: "😰",
+    nombre: "Ansiosa",
+    descripcion: "Vamos poco a poco.",
+    mensaje: "Respira profundo. Un momento a la vez."
+  },
+
+  {
+    emoji: "🤔",
+    nombre: "Curiosa",
+    descripcion: "Algo despertó tu curiosidad.",
+    mensaje: "Explora, pregunta y descubre todo lo que quieras."
+  },
+
+  {
+    emoji: "😡",
+    nombre: "Enojada",
+    descripcion: "Está bien sentir enojo.",
+    mensaje: "Date un momento. Lo que sientes importa."
+  },
+
+  {
+    emoji: "😳",
+    nombre: "Nerviosa",
+    descripcion: "Sé que los nervios pueden sentirse enormes.",
+    mensaje: "No tienes que hacerlo perfecto. Solo da el siguiente paso."
+  },
+
+  {
+    emoji: "😨",
+    nombre: "Asustada",
+    descripcion: "No tienes que enfrentarlo todo sola.",
+    mensaje: "Respira conmigo. Un momento a la vez."
+  },
+
+  {
+    emoji: "🥱",
+    nombre: "Cansada",
+    descripcion: "También mereces descansar.",
+    mensaje: "No tienes que sentirte culpable por parar un rato."
+  },
+
+  {
+    emoji: "🥰",
+    nombre: "Con ganas de amor",
+    descripcion: "Aquí tienes un poquito de cariño.",
+    mensaje: "Te quiero muchísimo. 💜"
+  }
+
+];
+
+
+let emocionActual = 0;
+
+
+/* ENTRAR */
+
+function entrar() {
+
+  document.getElementById("inicio")
+    .classList.add("hidden");
+
+  document.getElementById("principal")
+    .classList.remove("hidden");
+
+  cargarEmociones();
+
+}
+
+
+/* CARGAR EMOCIONES */
+
+function cargarEmociones() {
+
+  const contenedor =
+    document.getElementById("emociones");
+
+  contenedor.innerHTML = "";
+
+  emociones.forEach((emocion, indice) => {
+
+    const boton =
+      document.createElement("button");
+
+    boton.className = "emocion";
+
+    boton.innerHTML = `
+      <span class="emoji">${emocion.emoji}</span>
+      ${emocion.nombre}
+      <br>
+      <small>Presiona aquí</small>
+    `;
+
+    boton.onclick = function() {
+
+      abrirEmocion(indice);
+
+    };
+
+    contenedor.appendChild(boton);
+
+  });
+
+}
+
+
+/* ABRIR EMOCIÓN */
+
+function abrirEmocion(indice) {
+
+  emocionActual = indice;
+
+  const emocion =
+    emociones[indice];
+
+  document.getElementById("principal")
+    .classList.add("hidden");
+
+  document.getElementById("emocion")
+    .classList.remove("hidden");
+
+  document.getElementById("emojiGrande")
+    .textContent = emocion.emoji;
+
+  document.getElementById("tituloEmocion")
+    .textContent = emocion.nombre;
+
+  document.getElementById("descripcionEmocion")
+    .textContent = emocion.descripcion;
+
+  document.getElementById("mensajeEmocion")
+    .textContent = emocion.mensaje;
+
+  cargarVideos();
+
+}
+
+
+/* VIDEOS */
+
+function cargarVideos() {
+
+  const contenedor =
+    document.getElementById("videos");
+
+  contenedor.innerHTML = "";
+
+  /*
+    Aquí posteriormente conectaremos
+    los 5 videos de cada emoción.
+  */
+
+  for (let i = 1; i <= 5; i++) {
+
+    const boton =
+      document.createElement("button");
+
+    boton.className = "video-boton";
+
+    boton.innerHTML = `
+      <span class="play">▶</span>
+      Video ${i}
+    `;
+
+    boton.onclick = function() {
+
+      alert(
+        "Aquí aparecerá el video que tú hayas agregado. 💜"
+      );
+
+    };
+
+    contenedor.appendChild(boton);
+
+  }
+
+}
+
+
+/* VOLVER */
+
+function volverInicio() {
+
+  document.getElementById("emocion")
+    .classList.add("hidden");
+
+  document.getElementById("principal")
+    .classList.remove("hidden");
+
+}
+
+
+/* ADMIN */
+
+function abrirAdmin() {
+
+  document.getElementById("modalAdmin")
+    .classList.remove("hidden");
+
+  document.getElementById("codigo").value = "";
+
+}
+
+
+function cerrarAdmin() {
+
+  document.getElementById("modalAdmin")
+    .classList.add("hidden");
+
+}
+
+
+function comprobarCodigo() {
+
+  const codigo =
+    document.getElementById("codigo").value;
+
+  /*
+    Código inicial de NOOK:
+    0426
+  */
+
+  if (codigo === "0426") {
+
+    cerrarAdmin();
+
+    document.getElementById("principal")
+      .classList.add("hidden");
+
+    document.getElementById("administrador")
+      .classList.remove("hidden");
+
+    cargarAdministrador();
+
+  } else {
+
+    alert("Código incorrecto.");
+
+  }
+
+}
+
+
+/* ADMINISTRADOR */
+
+function cargarAdministrador() {
+
+  const lista =
+    document.getElementById("listaAdmin");
+
+  lista.innerHTML = "";
+
+  emociones.forEach((emocion, indice) => {
+
+    const item =
+      document.createElement("div");
+
+    item.className = "admin-item";
+
+    item.innerHTML = `
+      <span>
+        ${emocion.emoji} ${emocion.nombre}
+      </span>
+
+      <span>
+        5 videos ›
+      </span>
+    `;
+
+    item.onclick = function() {
+
+      alert(
+        "Aquí agregaremos el sistema para subir los 5 videos de " +
+        emocion.nombre + "."
+      );
+
+    };
+
+    lista.appendChild(item);
+
+  });
+
+}
+
+
+/* VOLVER DESDE ADMIN */
+
+function volverPrincipal() {
+
+  document.getElementById("administrador")
+    .classList.add("hidden");
+
+  document.getElementById("principal")
+    .classList.remove("hidden");
+
+}
+
+</script>
+
+</body>
+  </html>
