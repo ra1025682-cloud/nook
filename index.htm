@@ -654,14 +654,12 @@ function cargarAdministrador() {
       </span>
     `;
 
-    item.onclick = function() {
+   item.onclick = function() {
 
-      alert(
-        "Aquí agregaremos el sistema para subir los 5 videos de " +
-        emocion.nombre + "."
-      );
+  abrirGestionVideos(indice);
 
-    };
+};
+
 
     lista.appendChild(item);
 
