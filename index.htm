@@ -614,31 +614,33 @@ function comprobarCodigo() {
     document.getElementById("principal")
       .classList.add("hidden");
 
-    document.getElementById("admin
+    document.getElementById("administrador")
+      .classList.remove("hidden");
 
-    
+    cargarAdministrador();
 
-  
+  } else {
 
-    
+    alert("Código incorrecto.");
 
-  
+  }
 
-
+}
 
 
 /* ADMINISTRADOR */
 
-
 function cargarAdministrador() {
 
-  const lista = document.getElementById("listaAdmin");
+  const lista =
+    document.getElementById("listaAdmin");
 
   lista.innerHTML = "";
 
   emociones.forEach((emocion, indice) => {
 
-    const item = document.createElement("div");
+    const item =
+      document.createElement("div");
 
     item.className = "admin-item";
 
@@ -648,13 +650,16 @@ function cargarAdministrador() {
       </span>
 
       <span>
-        5 videos →
+        5 videos ›
       </span>
     `;
 
     item.onclick = function() {
 
-      abrirGestionVideos(indice);
+      alert(
+        "Aquí agregaremos el sistema para subir los 5 videos de " +
+        emocion.nombre + "."
+      );
 
     };
 
@@ -663,85 +668,6 @@ function cargarAdministrador() {
   });
 
 }
-
-
-function abrirGestionVideos(indice) {
-
-  const emocion = emociones[indice];
-
-  let contenido = `
-    <div class="contenedor">
-
-      <button class="volver" onclick="cargarAdministrador()">
-        ← Volver
-      </button>
-
-      <h1>${emocion.emoji} ${emocion.nombre}</h1>
-
-      <p class="subtitulo">
-        Administra los 5 videos de esta emoción.
-      </p>
-
-      <div id="videosAdmin"></div>
-
-    </div>
-  `;
-
-  document.getElementById("administrador").innerHTML = contenido;
-
-  const videosAdmin = document.getElementById("videosAdmin");
-
-  for (let i = 1; i <= 5; i++) {
-
-    const video = document.createElement("div");
-
-    video.className = "admin-item";
-
-    video.innerHTML = `
-      <span>Video ${i}</span>
-      <button class="secundario"
-        onclick="seleccionarVideo(${indice}, ${i})">
-        Subir video
-      </button>
-    `;
-
-    videosAdmin.appendChild(video);
-
-  }
-
-}
-
-
-function seleccionarVideo(indice, numero) {
-
-  const input = document.createElement("input");
-
-  input.type = "file";
-  input.accept = "video/*";
-
-  input.onchange = function() {
-
-    const archivo = input.files[0];
-
-    if (!archivo) {
-      return;
-    }
-
-    alert(
-      "Video seleccionado: " +
-      archivo.name +
-      "\n\nTodavía falta conectarlo a Supabase."
-    );
-
-  };
-
-  input.click();
-
-}
-     
-      
-      
-
 
 
 /* VOLVER DESDE ADMIN */
