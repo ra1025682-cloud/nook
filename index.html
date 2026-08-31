@@ -714,16 +714,31 @@ function abrirGestionVideos(indice) {
 
 function seleccionarVideo(indice, numero) {
 
-  alert(
-    "Seleccionaste Video " +
-    numero +
-    " de " +
-    emociones[indice].nombre +
-    "."
-  );
+  const input = document.createElement("input");
+
+  input.type = "file";
+  input.accept = "video/*";
+
+  input.onchange = function() {
+
+    const archivo = input.files[0];
+
+    if (!archivo) {
+      return;
+    }
+
+    alert(
+      "Video seleccionado: " +
+      archivo.name +
+      "\n\nTodavía falta conectarlo a Supabase."
+    );
+
+  };
+
+  input.click();
 
 }
-      
+     
       
       
 
