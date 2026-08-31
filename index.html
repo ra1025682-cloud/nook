@@ -655,85 +655,10 @@ function cargarAdministrador() {
     `;
 
     item.onclick = function() {
-const input = document.createElement("input");
-input.type = "file";
-input.accept = "video/*";
 
-input.onchange = async function () {
-
-  const archivo = input.files[0];
-
-  if (!archivo) return;
-
-  if (archivo.size > 50 * 1024 * 1024) {
-    alert("El video no puede pesar más de 50 MB.");
-    return;
-  }
-
-  const { data: existentes, error: errorConsulta } =
-    await supabaseClient
-      .from("Videos")
-      .select("número")
-      .eq("emoción", emocion.nombre);
-
-  if (errorConsulta) {
-    alert("No se pudieron consultar los videos: " + errorConsulta.message);
-    return;
-  }
-
-  if (existentes.length >= 5) {
-    alert("Esta emoción ya tiene 5 videos.");
-    return;
-  }
-
-  const numero = existentes.length + 1;
-
-  const nombreArchivo =
-    emocion.nombre.toLowerCase().replaceAll(" ", "_") +
-    "_" +
-    numero +
-    "_" +
-    Date.now() +
-    "_" +
-    archivo.name;
-
-  const { error: errorSubida } =
-    await supabaseClient.storage
-      .from("videos")
-      .upload(nombreArchivo, archivo);
-
-  if (errorSubida) {
-    alert("Error al subir el video: " + errorSubida.message);
-    return;
-  }
-
-  const { data: urlVideo } =
-    supabaseClient.storage
-      .from("videos")
-      .getPublicUrl(nombreArchivo);
-
-  const { error: errorBD } =
-    await supabaseClient
-      .from("Videos")
-      .insert({
-        "emoción": emocion.nombre,
-        "número": numero,
-        "nombre": archivo.name,
-        "ruta": urlVideo.publicUrl
-      });
-
-  if (errorBD) {
-    alert("El video se subió, pero no se pudo guardar: " + errorBD.message);
-    return;
-  }
-
-  alert("¡Video " + numero + " subido correctamente! 💜");
-};
-
-input.click();
-      
-      
-        
+      alert(
+        "Aquí agregaremos el sistema para subir los 5 videos de " +
+        emocion.nombre + "."
       );
 
     };
@@ -777,4 +702,4 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 </body>
-  </html>
+</html>
