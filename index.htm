@@ -634,7 +634,8 @@ function cargarAdministrador() {
 
   const lista =
     document.getElementById("listaAdmin");
-
+  
+  document.getElementById("administrador").classList.remove("hidden");
   lista.innerHTML = "";
 
   emociones.forEach((emocion, indice) => {
