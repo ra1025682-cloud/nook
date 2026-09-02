@@ -714,6 +714,29 @@ function cargarAdministrador() {
 
   }
 
+function seleccionarVideo(indice, numero) {
+
+  const input = document.createElement("input");
+
+  input.type = "file";
+  input.accept = "video/*";
+
+  input.onchange = function() {
+
+    const archivo = input.files[0];
+
+    if (!archivo) {
+      return;
+    }
+
+    alert("Video seleccionado: " + archivo.name);
+
+  };
+
+  input.click();
+
+}
+
 
 /* VOLVER DESDE ADMIN */
 
