@@ -721,7 +721,7 @@ function seleccionarVideo(indice, numero) {
   input.type = "file";
   input.accept = "video/*";
 
-  input.onchange = function() {
+  input.onchange = async function() {
 
     const archivo = input.files[0];
 
@@ -729,7 +729,31 @@ function seleccionarVideo(indice, numero) {
       return;
     }
 
-    alert("Video seleccionado: " + archivo.name);
+    alert("Subiendo video...");
+
+    const emocion = emociones[indice].nombre;
+
+    const nombreArchivo =
+      emocion + "/video-" + numero + "-" + Date.now() + "-" + archivo.name;
+
+    const { data, error } = await supabaseClient
+      .storage
+      .from("videos")
+      .upload(nombreArchivo, archivo, {
+        upsert: true
+      });
+
+    if (error) {
+
+      alert(
+        "No se pudo subir el video.\n\n" +
+        error.message
+      );
+
+      return;
+    }
+
+    alert("¡Video subido correctamente! 🎉");
 
   };
 
