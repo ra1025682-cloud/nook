@@ -738,7 +738,7 @@ function seleccionarVideo(indice, numero) {
 
     const { data, error } = await supabaseClient
       .storage
-      .from("videos")
+      .from("Videos")
       .upload(nombreArchivo, archivo, {
         upsert: true
       });
